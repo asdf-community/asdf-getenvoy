@@ -1,6 +1,6 @@
 # asdf-getenvoy
 
-![CI](https://github.com/superbrothers/asdf-getenvoy/workflows/CI/badge.svg)
+[![CI](https://github.com/superbrothers/asdf-getenvoy/workflows/CI/badge.svg)](https://github.com/superbrothers/asdf-getenvoy/actions?query=workflow%3ACI)
 
 [getenvoy](https://www.getenvoy.io/) plugin for the [asdf](https://github.com/asdf-vm/asdf) version manager.
 
