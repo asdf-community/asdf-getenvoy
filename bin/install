@@ -9,7 +9,7 @@ function install_getenvoy() {
   local bin_install_path="${install_path}/bin"
   local file="getenvoy"
   local kernel; kernel="$(uname -s)"
-  local download_url="https://github.com/tetratelabs/getenvoy/releases/download/v${version}/getenvoy_${version}_${kernel}_x86_64.tar.gz"
+  local download_url="https://github.com/tetratelabs-attic/getenvoy/releases/download/v${version}/getenvoy_${version}_${kernel}_x86_64.tar.gz"
 
   echo "Downloading getenvoy from ${download_url}"
 
