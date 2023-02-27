@@ -15,10 +15,12 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
+        version: ["0.2.0", "0.3.0", "latest"]
     steps:
     - uses: actions/checkout@v3
     - uses: asdf-vm/actions/plugin-test@v1
       with:
+        version: ${{ matrix.version }}
         command: getenvoy --version
   lint:
     runs-on: ubuntu-latest
