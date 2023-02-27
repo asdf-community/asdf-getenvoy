@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+SCRIPT_ROOT="$(cd "$(dirname "$0")"; pwd)"
+# shellcheck source=lib/utils.sh
+source "${SCRIPT_ROOT}/../lib/utils.sh"
+
 function install_getenvoy() {
   # local install_type=$1
   local version="$2"
@@ -9,7 +13,22 @@ function install_getenvoy() {
   local bin_install_path="${install_path}/bin"
   local file="getenvoy"
   local kernel; kernel="$(uname -s)"
-  local download_url="https://github.com/tetratelabs-attic/getenvoy/releases/download/v${version}/getenvoy_${version}_${kernel}_x86_64.tar.gz"
+  local download_url; download_url="https://github.com/tetratelabs-attic/getenvoy/releases/download/v${version}/getenvoy_${version}_${kernel}_x86_64.tar.gz"
+
+  if is_greater "$version" "0.2.99"; then
+    local architecture
+    case "$(uname -m)" in
+      aarch64* | arm64) architecture="arm64" ;;
+      x86_64*) architecture="amd64" ;;
+      *)
+        echo "Unsupported architecture" >&2
+        exit 1
+        ;;
+    esac
+
+    kernel="$(echo "$kernel" | tr "[:upper:]" "[:lower:]")"
+    download_url="https://github.com/tetratelabs-attic/getenvoy/releases/download/v${version}/getenvoy_${version}_${kernel}_${architecture}.tar.gz"
+  fi
 
   echo "Downloading getenvoy from ${download_url}"
 
